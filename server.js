@@ -10,8 +10,9 @@ const connection = mysql.createConnection({
   // Your username
   user: "root",
   // Your password
-  password: "Password",
-  database: "etracker_db"
+  password: "MyNewPass",
+  database: "etracker_db",
+  insecureAuth: true
 });
 
 // CONNECT MYSQL AND SQL DATABASE
@@ -166,7 +167,7 @@ function addEmployee() {
       })
   })
 };
-
+/*
 // FUNCTION FOR UPDATING DEPARTMENT
 function updateDepartments() {
   const query = connection.query('UPDATE etracker_db SET ? WHERE ?', function(err, results) {
@@ -200,4 +201,4 @@ function updateDepartments() {
   }
 )};
 
-
+*/
