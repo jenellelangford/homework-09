@@ -12,7 +12,6 @@ const connection = mysql.createConnection({
   // Your password
   password: "MyNewPass",
   database: "etracker_db",
-  insecureAuth: true
 });
 
 // CONNECT MYSQL AND SQL DATABASE
@@ -167,7 +166,31 @@ function addEmployee() {
       })
   })
 };
-/*
+
+// FUNCTION FOR VIEWING DEPARTMENTS
+function viewDepartments() {
+  connection.query('SELECT * FROM department',
+  (error, res) => {
+    console.table(res);
+  })
+}
+
+// FUNCTION FOR VIEWING ROLES
+function viewRoles() {
+  connection.query('SELECT * FROM role',
+  (error, res) => {
+    console.table(res);
+  })
+}
+
+// FUNCTION FOR VIEWING EMPLOYEES
+function viewEmployees() {
+  connection.query('SELECT * FROM employee',
+  (error, res) => {
+    console.table(res);
+  })
+};
+
 // FUNCTION FOR UPDATING DEPARTMENT
 function updateDepartments() {
   const query = connection.query('UPDATE etracker_db SET ? WHERE ?', function(err, results) {
