@@ -27,4 +27,4 @@ CREATE TABLE employee (
 );
 
 
-SELECT * FROM tracker;
+SELECT * FROM etracker;
