@@ -1,5 +1,6 @@
 const mysql = require("mysql");
 const inquirer = require('inquirer');
+const cTable = require('console.table');
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -21,21 +22,21 @@ connection.connect(function(err) {
 
 // START INQUIRER QUESTIONS
 function start() {
-  inquirer.prompt ({
-    type: 'list',
-    name: 'userChoice',
-    message: 'What would you like to do?',
-    choices: [
-    'Add departments',
-    'Add roles',
-    'Add employees',
-    'View departments',
-    'View roles',
-    'View employees',
-    'Update departments',
-    'Update roles',
-    'Update employees'
-    ]}
-  )}
-
-  
+  inquirer.prompt({
+      name: "userChoice",
+      type: "list",
+      message: "What would you like to do?",
+      choices: [
+      'Add departments',
+      'Add roles',
+      'Add employees',
+      'View departments',
+      'View roles',
+      'View employees',
+      'Update departments',
+      'Update roles',
+      'Update employees' ]
+    }).then ( response => {
+      if (response.type === )
+    })
+  }
