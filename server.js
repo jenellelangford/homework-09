@@ -10,13 +10,13 @@ const connection = mysql.createConnection({
   // Your username
   user: "root",
   // Your password
-  password: "54GD94em@",
+  password: "Password",
   database: "etracker_db"
 });
 
 // CONNECT MYSQL AND SQL DATABASE
 connection.connect(function(err) {
-  if (err) throw err;
+  if (err) throw (err);
   start();
 });
 
@@ -81,12 +81,12 @@ function addDepartment() {
     }
   ]).then (response => {
     connection.query(
-      'INSERT INTO etracker SET ?',
+      'INSERT INTO etracker_db SET ?',
       {
         name: response.departmentName
       },
       function(err) {
-        if (err) throw err;
+        if (err) throw (err);
         console.log('Your department has been added!');
         start();
       })
@@ -113,14 +113,14 @@ function addRole() {
     }
   ]).then (response => {
     connection.query(
-      'INSERT INTO etracker SET ?',
+      'INSERT INTO etracker_db SET ?',
       {
         title: response.roleName,
         salary: response.roleSalary,
         department_id: response.roleId
       },
       function(err) {
-        if (err) throw err;
+        if (err) throw (err);
         console.log('Your role has been added!');
         start();
       })
@@ -152,7 +152,7 @@ function addEmployee() {
     },
   ]).then (response => {
     connection.query(
-      'INSERT INTO etracker SET ?',
+      'INSERT INTO etracker_db SET ?',
       {
         first_name: response.employeeFirstName,
         last_name: response.employeeLastName,
@@ -160,12 +160,44 @@ function addEmployee() {
         manager_id: response.managerId
       },
       function(err) {
-        if (err) throw err;
+        if (err) throw (err);
         console.log('Your new employee has been added!');
         start();
       })
   })
 };
 
+// FUNCTION FOR UPDATING DEPARTMENT
+function updateDepartments() {
+  const query = connection.query('UPDATE etracker_db SET ? WHERE ?', function(err, results) {
+    if (err) throw (err);
+    inquirer.prompt ([
+      {
+        name: 'updateChoice',
+        type: 'rawlist',
+        choices: function() {
+          const choiceArray = [];
+          for (var i = 0; i < results.length; i++) {
+            choiceArray.push(results[i].name);
+          }
+          return choiceArray;
+        },
+        message: 'What department would you like to update?'
+      },
+      {
+        name: 'departmentChoice',
+        type: 'input',
+        message: 'What would you like to rename this department?'
+      }
+    ]).then (function(answer) {
+      let chosenDept;
+      for (var i = 0; i < results.length; i++) {
+        if (results[i].name === answer.updateChoice) {
+          chosenDept = results[i];
+        }
+      }
+    })
+  }
+)};
 
 
