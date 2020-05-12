@@ -8,9 +8,9 @@ const connection = mysql.createConnection({
   // Your port; if not 3306
   port: 3306,
   // Your username
-  user: "root",
+  user: "jenelle",
   // Your password
-  password: "MyNewPass",
+  password: "jenelle123",
   database: "etracker_db",
 });
 
@@ -37,38 +37,48 @@ function start() {
       'Update roles',
       'Update employees',
       'EXIT' ]
-    }).then 
-    switch(response) {
-      case (response.userChoice === 'Add departments'):
-      addDepartment();
-      break;
-      case (response.userChoice === 'Add roles'):
-      addRole();
-      break;
-      case (response.userChoice === 'Add employees'):
-      addEmployee();
-      break;
-      case (response.userChoice === 'View departments'):
-      viewDepartments();
-      break;
-      case (response.userChoice === 'View roles'):
-      viewRoles();
-      break;
-      case (response.userChoice === 'View employees'):
-      viewEmployees();
-      break;
-      case (response.userChoice === 'Update departments'):
-      updateDepartments();
-      break;
-      case (response.userChoice === 'Update roles'):
-      updateRoles();
-      break;
-      case (response.userChoice === 'Update employees'):
-      updateEmployees();
-      break;
-      default:
-      text = 'See you next time!';
+    }).then ( response => {
+      switch(response.userChoice) {
+        case 'Add departments':
+          addDepartment();
+          break;
+
+        case 'Add roles':
+          addRole();
+          break;
+      
+        case 'Add employees':
+          addEmployee();
+          break;
+
+        case 'View departments':
+          addDepartment();
+          break;
+
+        case 'View roles':
+          viewRoles();
+          break;
+
+        case 'View employees':
+          viewEmployees();
+          break;
+
+        case 'Update departments':
+          updateDepartments();
+          break;
+
+        case 'Update roles':
+          updateRoles();
+          break;
+
+        case 'Update employees':
+          updateEmployees();
+          break;
+
+        default:
+        text = 'See you next time!';
     }
+  })
   };
 
 // FUNCTION FOR ADDING NEW DEPARTMENT 
@@ -81,7 +91,7 @@ function addDepartment() {
     }
   ]).then (response => {
     connection.query(
-      'INSERT INTO etracker_db SET ?',
+      'INSERT INTO department SET ?',
       {
         name: response.departmentName
       },
@@ -113,7 +123,7 @@ function addRole() {
     }
   ]).then (response => {
     connection.query(
-      'INSERT INTO etracker_db SET ?',
+      'INSERT INTO role SET ?',
       {
         title: response.roleName,
         salary: response.roleSalary,
@@ -152,7 +162,7 @@ function addEmployee() {
     },
   ]).then (response => {
     connection.query(
-      'INSERT INTO etracker_db SET ?',
+      'INSERT INTO employee SET ?',
       {
         first_name: response.employeeFirstName,
         last_name: response.employeeLastName,
@@ -224,4 +234,4 @@ function updateDepartments() {
   }
 )};
 
-*/
+
